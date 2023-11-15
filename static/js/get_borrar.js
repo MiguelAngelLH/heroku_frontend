@@ -1,6 +1,6 @@
 function borrarContacto() {
     const email = document.getElementById('email').value;
-    const URL = "http://localhost:8000/contactos/" + email;
+    const URL = "https://miapi-1416df5a6c82.herokuapp.com/contactos" + email;
 
     var request = new XMLHttpRequest();
     request.open('DELETE', URL, true);
