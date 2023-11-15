@@ -4,7 +4,7 @@ function editarContacto() {
     const nuevoNombre = document.getElementById('nombre').value;
     const nuevoTelefono = document.getElementById('telefono').value;
 
-    const URL = "http://localhost:8000/contactos/" + correoActual; 
+    const URL = "https://miapi-1416df5a6c82.herokuapp.com/contactos" + correoActual; 
     
     fetch(URL, {
         method: 'PUT',
