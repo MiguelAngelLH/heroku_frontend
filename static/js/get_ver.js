@@ -1,5 +1,5 @@
 function verContactos() {
-    const URL = "http://127.0.0.1:8000/contactos";
+    const URL = "https://miapi-1416df5a6c82.herokuapp.com/contactos";
     var request = new XMLHttpRequest();
     request.open('GET', URL, true);
 
