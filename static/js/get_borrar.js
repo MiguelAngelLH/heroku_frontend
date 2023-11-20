@@ -1,33 +1,42 @@
-function borrarContacto() {
-    const email = document.getElementById('email').value;
-    const URL = "https://miapi-1416df5a6c82.herokuapp.com/contactos" + email;
+const urlParams = new URLSearchParams(window.location.search);
+const email = urlParams.get('email');
 
+function getContactDetails() {
     var request = new XMLHttpRequest();
-    request.open('DELETE', URL, true);
-
+    request.open('GET', "https://miapi-1416df5a6c82.herokuapp.com/contactos" + email);
     request.send();
 
-    request.onload = () => {
-        if (request.status === 200) {
-            // Contacto borrado correctamente
-            console.log("Contacto borrado correctamente.");
-        } else if (request.status === 404) {
-            // No se encontró el contacto con ese correo
-            console.log("No se encontró el contacto con ese correo.");
-        } else {
-            // Error al intentar borrar el contacto
-            console.log("Error al intentar borrar el contacto.");
-        }
+    request.onload = (e) => {
+        const response = request.responseText;
+        const json = JSON.parse(response);
+
+        document.getElementById('email').textContent = json.email;
+        document.getElementById('nombre').textContent = json.nombre;
+        document.getElementById('telefono').textContent = json.telefono;
+        console.log(json.email);
     };
 }
 
-function regresar() {
-    // Redirige al index.html
-    window.location.href = "/";
+window.onload = getContactDetails;
+
+function goBack() {
+    window.history.back();
 }
 
+function borrar() {
+    if (confirm("¿Estás seguro de que deseas borrar este contacto?")) {
+        var request = new XMLHttpRequest();
+        request.open('DELETE', "https://miapi-1416df5a6c82.herokuapp.com/contactos" + email);
+        request.send();
 
-
-
-
-
+        request.onload = (e) => {
+            const response = request.responseText;
+            const json = JSON.parse(response);
+            
+            alert("Contacto borrado exitosamente");
+            window.history.back();
+            window.location.href = "/";
+            
+        };
+    }
+}
