@@ -35,7 +35,11 @@ function borrar() {
             
             alert("Contacto borrado exitosamente");
             window.history.back();
-            window.location.href = "/";
+          
+            function regresar() {
+    // Redirige al índice 
+    window.location.href = "/";
+}
             
         };
     }
